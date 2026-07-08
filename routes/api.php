@@ -18,6 +18,13 @@ use App\Http\Controllers\Api\WorkspaceController;
 use Illuminate\Support\Facades\Route;
 
 // ──────────────────────────────────────────────
+// Home
+// ──────────────────────────────────────────────
+Route::get('/', function () {
+    return response()->json(['message' => 'Welcome to the PMS API!']);
+});
+
+// ──────────────────────────────────────────────
 // Auth
 // ──────────────────────────────────────────────
 Route::prefix('auth')->group(function () {

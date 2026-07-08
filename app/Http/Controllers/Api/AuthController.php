@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use OpenApi\Attributes as OA;
 
 class AuthController extends BaseController
 {
@@ -18,6 +19,31 @@ class AuthController extends BaseController
         private readonly WorkspaceService $workspaceService,
     ) {}
 
+    #[OA\Post(
+        path: '/auth/register',
+        operationId: 'register',
+        summary: 'Register a new user',
+        tags: ['Auth'],
+    )]
+    #[OA\RequestBody(
+        content: new OA\JsonContent(
+            required: ['name', 'email', 'password', 'password_confirmation'],
+            properties: [
+                new OA\Property(property: 'name', type: 'string'),
+                new OA\Property(property: 'email', type: 'string'),
+                new OA\Property(property: 'password', type: 'string'),
+                new OA\Property(property: 'password_confirmation', type: 'string'),
+            ],
+        ),
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'User registered successfully',
+    )]
+    #[OA\Response(
+        response: 400,
+        description: 'Validation error',
+    )]
     public function register(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -53,6 +79,29 @@ class AuthController extends BaseController
         ], 'Registration successful');
     }
 
+    #[OA\Post(
+        path: '/auth/login',
+        operationId: 'login',
+        summary: 'Login a user',
+        tags: ['Auth'],
+    )]
+    #[OA\RequestBody(
+        content: new OA\JsonContent(
+            required: ['email', 'password'],
+            properties: [
+                new OA\Property(property: 'email', type: 'string'),
+                new OA\Property(property: 'password', type: 'string'),
+            ],
+        ),
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User logged in successfully',
+    )]
+    #[OA\Response(
+        response: 401,
+        description: 'Invalid credentials',
+    )]
     public function login(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -74,6 +123,24 @@ class AuthController extends BaseController
         ], 'Login successful');
     }
 
+    #[OA\Post(
+        path: '/auth/logout',
+        operationId: 'logout',
+        summary: 'Logout a user',
+        tags: ['Auth'],
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User logged out successfully',
+    )]
+    #[OA\Response(
+        response: 401,
+        description: 'Unauthenticated',
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Forbidden',
+    )]
     public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
@@ -81,6 +148,24 @@ class AuthController extends BaseController
         return $this->ok(null, 'Logged out');
     }
 
+    #[OA\Get(
+        path: '/auth/me',
+        operationId: 'me',
+        summary: 'Get current user',
+        tags: ['Auth'],
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User retrieved successfully',
+    )]
+    #[OA\Response(
+        response: 401,
+        description: 'Unauthenticated',
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Forbidden',
+    )]
     public function me(Request $request): JsonResponse
     {
         return $this->ok(
@@ -88,6 +173,24 @@ class AuthController extends BaseController
         );
     }
 
+    #[OA\Put(
+        path: '/auth/profile',
+        operationId: 'updateProfile',
+        summary: 'Update user profile',
+        tags: ['Auth'],
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'User profile updated successfully',
+    )]
+    #[OA\Response(
+        response: 401,
+        description: 'Unauthenticated',
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Forbidden',
+    )]
     public function updateProfile(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -103,6 +206,24 @@ class AuthController extends BaseController
         return $this->ok($user);
     }
 
+    #[OA\Put(
+        path: '/auth/password',
+        operationId: 'updatePassword',
+        summary: 'Update user password',
+        tags: ['Auth'],
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Password updated successfully',
+    )]
+    #[OA\Response(
+        response: 401,
+        description: 'Unauthenticated',
+    )]
+    #[OA\Response(
+        response: 403,
+        description: 'Forbidden',
+    )]
     public function updatePassword(Request $request): JsonResponse
     {
         $data = $request->validate([
