@@ -228,6 +228,1261 @@
                     }
                 }
             }
+        },
+        "/projects/{project}/epics": {
+            "get": {
+                "tags": [
+                    "Epics"
+                ],
+                "summary": "List epics for a project",
+                "description": "Returns a list of all epics in the specified project.",
+                "operationId": "listEpics",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Epics retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Epics"
+                ],
+                "summary": "Create a new epic",
+                "description": "Creates a new epic in the specified project.",
+                "operationId": "createEpic",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "description": "The title of the epic",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "The description of the epic",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the epic",
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "due_date": {
+                                        "description": "Due date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "assignee_id": {
+                                        "description": "ID of the assignee user",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Epic created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/epics/{epic}": {
+            "get": {
+                "tags": [
+                    "Epics"
+                ],
+                "summary": "Get epic details",
+                "description": "Returns details of a specific epic.",
+                "operationId": "getEpic",
+                "parameters": [
+                    {
+                        "name": "epic",
+                        "in": "path",
+                        "description": "The ID of the epic",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Epic retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Epics"
+                ],
+                "summary": "Update an epic",
+                "description": "Updates an existing epic.",
+                "operationId": "updateEpic",
+                "parameters": [
+                    {
+                        "name": "epic",
+                        "in": "path",
+                        "description": "The ID of the epic",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "description": "The title of the epic",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "The description of the epic",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the epic",
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "due_date": {
+                                        "description": "Due date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "assignee_id": {
+                                        "description": "ID of the assignee user",
+                                        "type": "integer"
+                                    },
+                                    "position": {
+                                        "description": "Position in list",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Epic updated successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Epics"
+                ],
+                "summary": "Delete an epic",
+                "description": "Deletes an existing epic.",
+                "operationId": "deleteEpic",
+                "parameters": [
+                    {
+                        "name": "epic",
+                        "in": "path",
+                        "description": "The ID of the epic",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Epic deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/labels": {
+            "get": {
+                "tags": [
+                    "Labels"
+                ],
+                "summary": "List labels in workspace",
+                "description": "Returns a list of all labels in the current workspace.",
+                "operationId": "listLabels",
+                "responses": {
+                    "200": {
+                        "description": "Labels retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Labels"
+                ],
+                "summary": "Create a new label",
+                "description": "Creates a new label in the current workspace.",
+                "operationId": "createLabel",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the label",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the label",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Description of the label",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Label created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/labels/{label}": {
+            "get": {
+                "tags": [
+                    "Labels"
+                ],
+                "summary": "Get label details",
+                "description": "Returns details of a specific label.",
+                "operationId": "getLabel",
+                "parameters": [
+                    {
+                        "name": "label",
+                        "in": "path",
+                        "description": "The ID of the label",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Label retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Labels"
+                ],
+                "summary": "Update a label",
+                "description": "Updates an existing label.",
+                "operationId": "updateLabel",
+                "parameters": [
+                    {
+                        "name": "label",
+                        "in": "path",
+                        "description": "The ID of the label",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the label",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the label",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "Description of the label",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Label updated successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Labels"
+                ],
+                "summary": "Delete a label",
+                "description": "Deletes an existing label.",
+                "operationId": "deleteLabel",
+                "parameters": [
+                    {
+                        "name": "label",
+                        "in": "path",
+                        "description": "The ID of the label",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Label deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "List projects",
+                "description": "Returns a list of projects in the current workspace.",
+                "operationId": "listProjects",
+                "parameters": [
+                    {
+                        "name": "is_archived",
+                        "in": "query",
+                        "description": "Filter by archived status",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "health",
+                        "in": "query",
+                        "description": "Filter by health status",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "on-track",
+                                "at-risk",
+                                "off-track"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Projects retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Create a new project",
+                "description": "Creates a new project in the current workspace.",
+                "operationId": "createProject",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the project",
+                                        "type": "string"
+                                    },
+                                    "key": {
+                                        "description": "The project key (e.g., PROJ)",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "The description of the project",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the project",
+                                        "type": "string"
+                                    },
+                                    "team_id": {
+                                        "description": "ID of the team",
+                                        "type": "integer"
+                                    },
+                                    "lead_id": {
+                                        "description": "ID of the project lead",
+                                        "type": "integer"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "target_date": {
+                                        "description": "Target date",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Project created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects/{project}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get project details",
+                "description": "Returns details of a specific project.",
+                "operationId": "getProject",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Update a project",
+                "description": "Updates an existing project.",
+                "operationId": "updateProject",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the project",
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "description": "The description of the project",
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "description": "Color for the project",
+                                        "type": "string"
+                                    },
+                                    "health": {
+                                        "description": "Health status",
+                                        "type": "string",
+                                        "enum": [
+                                            "on-track",
+                                            "at-risk",
+                                            "off-track"
+                                        ]
+                                    },
+                                    "progress": {
+                                        "description": "Progress percentage (0-100)",
+                                        "type": "integer"
+                                    },
+                                    "team_id": {
+                                        "description": "ID of the team",
+                                        "type": "integer"
+                                    },
+                                    "lead_id": {
+                                        "description": "ID of the project lead",
+                                        "type": "integer"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "target_date": {
+                                        "description": "Target date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "is_archived": {
+                                        "description": "Whether the project is archived",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Project updated successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Delete a project",
+                "description": "Deletes an existing project.",
+                "operationId": "deleteProject",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Project deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects/{project}/favorite": {
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Toggle project favorite status",
+                "description": "Toggles the favorite status of a project.",
+                "operationId": "toggleFavorite",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Favorite status toggled",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "is_favorite": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects/{project}/members": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "List project members",
+                "description": "Returns a list of members in the project.",
+                "operationId": "listProjectMembers",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Members retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Add member to project",
+                "description": "Adds a member to the project.",
+                "operationId": "addProjectMember",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "user_id": {
+                                        "description": "ID of the user to add",
+                                        "type": "integer"
+                                    },
+                                    "role": {
+                                        "description": "Role in the project",
+                                        "type": "string",
+                                        "enum": [
+                                            "admin",
+                                            "member",
+                                            "viewer"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Member added to project"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects/{project}/members/{user}": {
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Remove member from project",
+                "description": "Removes a member from the project.",
+                "operationId": "removeProjectMember",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "The ID of the user to remove",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Member removed from project"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/projects/{project}/sprints": {
+            "get": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "List sprints for a project",
+                "description": "Returns a list of all sprints in the specified project.",
+                "operationId": "listSprints",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sprints retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Create a new sprint",
+                "description": "Creates a new sprint in the specified project.",
+                "operationId": "createSprint",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "The ID of the project",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the sprint",
+                                        "type": "string"
+                                    },
+                                    "goal": {
+                                        "description": "The goal of the sprint",
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "description": "End date",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sprint created successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/sprints/{sprint}": {
+            "get": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Get sprint details",
+                "description": "Returns details of a specific sprint.",
+                "operationId": "getSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sprint retrieved successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Update a sprint",
+                "description": "Updates an existing sprint.",
+                "operationId": "updateSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "description": "The name of the sprint",
+                                        "type": "string"
+                                    },
+                                    "goal": {
+                                        "description": "The goal of the sprint",
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "description": "Start date",
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "description": "End date",
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sprint updated successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Delete a sprint",
+                "description": "Deletes an existing sprint.",
+                "operationId": "deleteSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sprint deleted successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/sprints/{sprint}/start": {
+            "post": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Start a sprint",
+                "description": "Starts the sprint.",
+                "operationId": "startSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sprint started successfully"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/sprints/{sprint}/complete": {
+            "post": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Complete a sprint",
+                "description": "Completes the sprint.",
+                "operationId": "completeSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "carry_over_sprint_id": {
+                                        "description": "ID of the sprint to carry over issues to",
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sprint completed successfully"
+                    },
+                    "400": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/sprints/{sprint}/issues/{issue}": {
+            "post": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Add issue to sprint",
+                "description": "Adds an issue to the sprint.",
+                "operationId": "addIssueToSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "issue",
+                        "in": "path",
+                        "description": "The ID of the issue",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Issue added to sprint"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Sprints"
+                ],
+                "summary": "Remove issue from sprint",
+                "description": "Removes an issue from the sprint.",
+                "operationId": "removeIssueFromSprint",
+                "parameters": [
+                    {
+                        "name": "sprint",
+                        "in": "path",
+                        "description": "The ID of the sprint",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "issue",
+                        "in": "path",
+                        "description": "The ID of the issue",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Issue removed from sprint"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -247,6 +1502,22 @@
         {
             "name": "Auth",
             "description": "Auth"
+        },
+        {
+            "name": "Epics",
+            "description": "Epics"
+        },
+        {
+            "name": "Labels",
+            "description": "Labels"
+        },
+        {
+            "name": "Projects",
+            "description": "Projects"
+        },
+        {
+            "name": "Sprints",
+            "description": "Sprints"
         }
     ]
 }
